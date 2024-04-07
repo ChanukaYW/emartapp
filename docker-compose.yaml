@@ -3,11 +3,11 @@ version: "3.8"
 services:
   client:
     build:
-      context: ./client
-    ports:
+      context: ./client  # Location of the docker file
+    ports:               # port mapping
       - "4200:4200"
     container_name: client
-    depends_on:
+    depends_on:          # Compose will delay starting the client container until the api and webapi containers are running
       - api
       - webapi
 
@@ -27,7 +27,7 @@ services:
       context: ./javaapi
     ports:
       - "9000:9000"
-    restart: always
+    restart: always     # This instructs the container to restart if it fails to run in the first attempt
     container_name: webapi
     depends_on:
       - emartdb
